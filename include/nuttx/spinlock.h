@@ -30,6 +30,10 @@
 #include <sys/types.h>
 #include <stdint.h>
 
+#if defined(CONFIG_ATOMIC)
+#include <stdatomic.h>
+#endif
+
 #include <nuttx/irq.h>
 
 #ifndef CONFIG_SPINLOCK
@@ -129,6 +133,14 @@ static inline spinlock_t up_testset(FAR volatile spinlock_t *lock)
 
   return ret;
 }
+#elif(CONFIG_ATOMIC)
+static inline spinlock_t up_testset(FAR volatile spinlock_t *lock)
+{
+  const static spinlock_t unlock = SP_UNLOCKED;
+  atomic_compare_exchange_strong(lock, &unlock, SP_LOCKED);
+  return *lock;
+}
+
 #endif
 
 /****************************************************************************
