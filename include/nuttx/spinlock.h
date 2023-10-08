@@ -136,8 +136,10 @@ static inline spinlock_t up_testset(FAR volatile spinlock_t *lock)
 #elif(CONFIG_ATOMIC)
 static inline spinlock_t up_testset(FAR volatile spinlock_t *lock)
 {
+  SP_DSB();
   const static spinlock_t unlock = SP_UNLOCKED;
   int success = atomic_compare_exchange_strong(lock, &unlock, SP_LOCKED);
+  SP_DSB();
   if(success) return SP_UNLOCKED;
   else return SP_LOCKED;
 }
