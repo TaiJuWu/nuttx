@@ -82,6 +82,13 @@ static bool nxmutex_is_reset(FAR mutex_t *mutex)
 
 int nxmutex_init(FAR mutex_t *mutex)
 {
+#ifdef _LIGHT_MUTEX_
+  dq_init(mutex->waitlist);
+  mutex->htcb = NULL;
+  mutex->holder = NXMUTEX_NO_HOLDER;
+
+  return OK;
+#else
   int ret = _SEM_INIT(&mutex->sem, 0, 1);
 
   if (ret < 0)
@@ -96,6 +103,7 @@ int nxmutex_init(FAR mutex_t *mutex)
   _SEM_SETPROTOCOL(&mutex->sem, SEM_TYPE_MUTEX);
 #endif
   return ret;
+#endif
 }
 
 /****************************************************************************
@@ -119,6 +127,14 @@ int nxmutex_init(FAR mutex_t *mutex)
 
 int nxmutex_destroy(FAR mutex_t *mutex)
 {
+#ifdef _LIGHT_MUTEX_
+
+dq_init(mutex->waitlist);
+mutex->htcb = NULL;
+mutex->holder = NXMUTEX_NO_HOLDER;
+
+return OK;
+#else
   int ret = _SEM_DESTROY(&mutex->sem);
 
   if (ret < 0)
@@ -128,6 +144,7 @@ int nxmutex_destroy(FAR mutex_t *mutex)
 
   mutex->holder = NXMUTEX_NO_HOLDER;
   return ret;
+#endif
 }
 
 /****************************************************************************
@@ -164,12 +181,17 @@ bool nxmutex_is_hold(FAR mutex_t *mutex)
 
 bool nxmutex_is_locked(FAR mutex_t *mutex)
 {
+
+#ifdef _LIGHT_MUTEX_
+  return mutex->htcb != NULL;
+#else
   int cnt;
   int ret;
 
   ret = _SEM_GETVALUE(&mutex->sem, &cnt);
 
   return ret >= 0 && cnt < 1;
+#endif
 }
 
 /****************************************************************************
@@ -194,6 +216,27 @@ bool nxmutex_is_locked(FAR mutex_t *mutex)
 
 int nxmutex_lock(FAR mutex_t *mutex)
 {
+#ifdef _LIGHT_MUTEX_
+  irqstate_t flag;
+
+  DEBUGASSERT(mutex != NULL && !up_interrupt_context());
+
+  flag = spinlock_irqsave(&mutex_spinlock);
+
+  if(mutex->holder == NULL)
+  {
+
+  }
+  else
+  {
+    
+  }
+
+  spinclock_irqrestore(NULL, mutex_spinlock);
+
+  return OK;
+
+#else
   int ret;
 
   DEBUGASSERT(!nxmutex_is_hold(mutex));
@@ -214,6 +257,7 @@ int nxmutex_lock(FAR mutex_t *mutex)
     }
 
   return ret;
+#endif
 }
 
 /****************************************************************************
@@ -329,6 +373,21 @@ int nxmutex_timedlock(FAR mutex_t *mutex, unsigned int timeout)
 
 int nxmutex_unlock(FAR mutex_t *mutex)
 {
+#ifdef _LIGHT_MUTEX_
+  int ret;
+
+  if (nxmutex_is_reset(mutex))
+    {
+      return OK;
+    }
+
+  DEBUGASSERT(nxmutex_is_hold(mutex));
+  mutex->htcb 
+  mutex->holder = NXMUTEX_NO_HOLDER;
+  
+
+  return OK;
+#else
   int ret;
 
   if (nxmutex_is_reset(mutex))
@@ -348,6 +407,7 @@ int nxmutex_unlock(FAR mutex_t *mutex)
     }
 
   return ret;
+#endif
 }
 
 /****************************************************************************

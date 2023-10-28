@@ -29,6 +29,7 @@
 #include <stdbool.h>
 
 #include <nuttx/semaphore.h>
+#include <nuttx/spinlock.h>
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -43,11 +44,22 @@
  * Public Type Definitions
  ****************************************************************************/
 
+#ifdef _LIGHT_MUTEX_
+
+static spinlock_t mutex_spinlock = SP_UNLOCKED; // trade off, it can be set per mutex
+struct mutex_s
+{
+  dq_queue_t waitlist;
+  FAR struct tcb_s *htcb;
+  pid_t holder;
+}
+#else
 struct mutex_s
 {
   sem_t sem;
   pid_t holder;
 };
+#endif
 
 typedef struct mutex_s mutex_t;
 
