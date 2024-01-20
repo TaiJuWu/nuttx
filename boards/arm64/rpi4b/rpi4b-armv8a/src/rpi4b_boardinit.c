@@ -1,5 +1,5 @@
 /****************************************************************************
- * boards/arm64/qemu/qemu-armv8a/src/qemu_boardinit.c
+ * boards/arm64/rpi4b/rpi4b-armv8a/src/rpi4b_boardinit.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -25,7 +25,7 @@
 #include <nuttx/config.h>
 #include <stdint.h>
 #include <nuttx/board.h>
-#include "qemu-armv8a.h"
+#include "rpi4b-armv8a.h"
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -40,15 +40,15 @@
  ****************************************************************************/
 
 /****************************************************************************
- * Name: qemu_memory_initialize
+ * Name: rpi4b_memory_initialize
  *
  * Description:
- *   All qemu architectures must provide the following entry point.  This
+ *   All rpi4b architectures must provide the following entry point.  This
  *   entry point is called early in the initialization before memory has
  *   been configured.  This board-specific function is responsible for
  *   configuring any on-board memories.
  *
- *   Logic in qemu_memory_initialize must be careful to avoid using any
+ *   Logic in rpi4b_memory_initialize must be careful to avoid using any
  *   global variables because those will be uninitialized at the time this
  *   function is called.
  *
@@ -60,18 +60,18 @@
  *
  ****************************************************************************/
 
-void qemu_memory_initialize(void)
+void rpi4b_memory_initialize(void)
 {
   /* SDRAM was initialized by a bootloader in the supported configurations. */
 }
 
 /****************************************************************************
- * Name: qemu_board_initialize
+ * Name: rpi4b_board_initialize
  *
  * Description:
- *   All qemu architectures must provide the following entry point.  This
+ *   All rpi4b architectures must provide the following entry point.  This
  *   entry point is called in the initialization phase -- after
- *   qemu_memory_initialize and after all memory has been configured and
+ *   rpi4b_memory_initialize and after all memory has been configured and
  *   mapped but before any devices have been initialized.
  *
  * Input Parameters:
@@ -82,7 +82,7 @@ void qemu_memory_initialize(void)
  *
  ****************************************************************************/
 
-void qemu_board_initialize(void)
+void rpi4b_board_initialize(void)
 {
 #ifdef CONFIG_ARCH_LEDS
   /* Configure on-board LEDs if LED support has been selected. */
@@ -108,6 +108,6 @@ void board_late_initialize(void)
 {
   /* Perform board initialization */
 
-  qemu_bringup();
+  rpi4b_bringup();
 }
 #endif /* CONFIG_BOARD_LATE_INITIALIZE */

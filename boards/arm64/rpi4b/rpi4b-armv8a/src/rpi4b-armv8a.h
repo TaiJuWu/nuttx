@@ -1,5 +1,5 @@
 /****************************************************************************
- * boards/arm64/qemu/qemu-armv8a/src/qemu-armv8a.h
+ * boards/arm64/rpi4b/rpi4b-armv8a/src/rpi4b-armv8a.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __BOARDS_ARM64_QEMU_QEMU_ARMV8A_SRC_QEMU_ARMV8A_H
-#define __BOARDS_ARM64_QEMU_QEMU_ARMV8A_SRC_QEMU_ARMV8A_H
+#ifndef __BOARDS_ARM64_RPI4B_RPI4B_ARMV8A_SRC_RPI4B_ARMV8A_H
+#define __BOARDS_ARM64_RPI4B_RPI4B_ARMV8A_SRC_RPI4B_ARMV8A_H
 
 /****************************************************************************
  * Included Files
@@ -44,7 +44,7 @@
  ****************************************************************************/
 
 /****************************************************************************
- * Name: qemu_bringup
+ * Name: rpi4b_bringup
  *
  * Description:
  *   Bring up board features
@@ -52,8 +52,8 @@
  ****************************************************************************/
 
 #if defined(CONFIG_BOARDCTL) || defined(CONFIG_BOARD_LATE_INITIALIZE)
-int qemu_bringup(void);
+int rpi4b_bringup(void);
 #endif
 
 #endif /* __ASSEMBLY__ */
-#endif /* __BOARDS_ARM64_QEMU_QEMU_ARMV8A_SRC_QEMU_ARMV8A_H */
+#endif /* __BOARDS_ARM64_RPI4B_RPI4B_ARMV8A_SRC_RPI4B_ARMV8A_H */

@@ -1,5 +1,5 @@
 /****************************************************************************
- * boards/arm64/qemu/qemu-armv8a/src/qemu_appinit.c
+ * boards/arm64/rpi4b/rpi4b-armv8a/src/rpi4b_appinit.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -28,7 +28,7 @@
 
 #include <nuttx/board.h>
 
-#include "qemu-armv8a.h"
+#include "rpi4b-armv8a.h"
 
 #ifdef CONFIG_BOARDCTL
 
@@ -67,7 +67,7 @@ int board_app_initialize(uintptr_t arg)
 #ifndef CONFIG_BOARD_LATE_INITIALIZE
   /* Perform board initialization */
 
-  return qemu_bringup();
+  return rpi4b_bringup();
 #else
   return OK;
 #endif

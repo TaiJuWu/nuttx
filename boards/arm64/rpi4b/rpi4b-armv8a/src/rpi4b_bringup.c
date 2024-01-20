@@ -1,5 +1,5 @@
 /****************************************************************************
- * boards/arm64/qemu/qemu-armv8a/src/qemu_bringup.c
+ * boards/arm64/rpi4b/rpi4b-armv8a/src/rpi4b_bringup.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -35,13 +35,13 @@
 #  include <libfdt.h>
 #endif
 
-#include "qemu-armv8a.h"
+#include "rpi4b-armv8a.h"
 
 /****************************************************************************
  * Pre-processor Definitions
  ****************************************************************************/
 
-#define QEMU_SPI_IRQ_BASE            32
+#define RPI4B_SPI_IRQ_BASE            32
 
 /****************************************************************************
  * Private Functions
@@ -67,7 +67,7 @@ fdt_get_irq(const void *fdt, int offset)
   pv = fdt_getprop(fdt, offset, "interrupts", NULL);
   if (pv != NULL)
     {
-      irq = fdt32_ld(pv + 1) + QEMU_SPI_IRQ_BASE;
+      irq = fdt32_ld(pv + 1) + RPI4B_SPI_IRQ_BASE;
     }
 
   return irq;
@@ -194,7 +194,7 @@ static void register_devices_from_fdt(void)
  *
  ****************************************************************************/
 
-int qemu_bringup(void)
+int rpi4b_bringup(void)
 {
   int ret;
 

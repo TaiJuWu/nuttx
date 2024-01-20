@@ -1,5 +1,5 @@
 # ##############################################################################
-# boards/arm64/qemu/qemu-armv8a/src/CMakeLists.txt
+# boards/arm64/rpi4b/rpi4b-armv8a/src/CMakeLists.txt
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more contributor
 # license agreements.  See the NOTICE file distributed with this work for
@@ -17,10 +17,10 @@
 # the License.
 #
 # ##############################################################################
-set(SRCS qemu_boardinit.c qemu_bringup.c)
+set(SRCS rpi4b_boardinit.c rpi4b_bringup.c)
 
 if(CONFIG_BOARDCTL)
-  list(APPEND SRCS qemu_appinit.c)
+  list(APPEND SRCS rpi4b_appinit.c)
 
 endif()
 

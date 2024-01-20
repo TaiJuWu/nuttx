@@ -1,5 +1,5 @@
 ############################################################################
-# boards/arm64/qemu/qemu-armv8a/src/Makefile
+# boards/arm64/rpi4b/rpi4b-armv8a/src/Makefile
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -20,10 +20,10 @@
 
 include $(TOPDIR)/Make.defs
 
-CSRCS = qemu_boardinit.c qemu_bringup.c
+CSRCS = rpi4b_boardinit.c rpi4b_bringup.c
 
 ifeq ($(CONFIG_BOARDCTL),y)
-CSRCS += qemu_appinit.c
+CSRCS += rpi4b_appinit.c
 endif
 
 ifeq ($(CONFIG_LIBC_FDT),y)
