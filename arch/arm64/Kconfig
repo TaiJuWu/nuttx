@@ -60,6 +60,21 @@ config ARCH_CHIP_QEMU
 	---help---
 		QEMU virt platform (ARMv8a)
 
+config ARCH_CHIP_RPI4B
+	bool "Raspberry pi 4B platform (ARMv8a)"
+	select ARCH_CORTEX_A72
+	# select ARCH_HAVE_ADDRENV
+	# select ARCH_HAVE_IRQTRIGGER
+	# select ARCH_HAVE_PSCI
+	# select ARCH_NEED_ADDRENV_MAPPING
+	# select ARCH_HAVE_POWEROFF
+	# select ARCH_HAVE_RESET
+	# select ARCH_HAVE_TEXT_HEAP
+	# select LIBC_ARCH_ELF_64BIT if LIBC_ARCH_ELF
+	---help---
+		Raspberry pi 4B platform (ARMv8a)
+
+
 config ARCH_CHIP_GOLDFISH
 	bool "goldfish platform (ARMv8a)"
 	select ARCH_CORTEX_A53
@@ -226,6 +241,7 @@ config ARCH_CHIP
 	default "a64"       if ARCH_CHIP_A64
 	default "rk3399"    if ARCH_CHIP_RK3399
 	default "qemu"      if ARCH_CHIP_QEMU
+	default "rpi4b"		if ARCH_CHIP_RPI4B
 	default "goldfish"  if ARCH_CHIP_GOLDFISH
 	default "fvp-v8r"   if ARCH_CHIP_FVP_ARMV8R
 	default "imx8"      if ARCH_CHIP_IMX8
@@ -313,6 +329,10 @@ endif
 
 if ARCH_CHIP_GOLDFISH
 source "arch/arm64/src/goldfish/Kconfig"
+endif
+
+if ARCH_CHIP_RPI4B
+source "arch/arm64/src/rpi4b/Kconfig"
 endif
 
 endif # ARCH_ARM64
