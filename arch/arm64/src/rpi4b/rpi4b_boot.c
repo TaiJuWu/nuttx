@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm64/src/qemu/qemu_boot.c
+ * arch/arm64/src/rpi4b/rpi4b_boot.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -42,8 +42,8 @@
 #include "arm64_arch.h"
 #include "arm64_internal.h"
 #include "arm64_mmu.h"
-#include "qemu_boot.h"
-#include "qemu_serial.h"
+#include "rpi4b_boot.h"
+#include "rpi4b_serial.h"
 
 #ifdef CONFIG_DEVICE_TREE
 #  include <nuttx/fdt.h>
@@ -175,17 +175,11 @@ void arm64_chip_boot(void)
   fdt_register((const char *)0x40000000);
 #endif
 
-#if defined(CONFIG_ARCH_CHIP_QEMU_WITH_HV)
-  arm64_psci_init("hvc");
-#elif defined(CONFIG_ARCH_HAVE_PSCI)
-  arm64_psci_init("smc");
-#endif
-
   /* Perform board-specific device initialization. This would include
    * configuration of board specific resources such as GPIOs, LEDs, etc.
    */
 
-  qemu_board_initialize();
+  rpi4b_board_initialize();
 
 #ifdef USE_EARLYSERIALINIT
   /* Perform early serial initialization if we are going to use the serial

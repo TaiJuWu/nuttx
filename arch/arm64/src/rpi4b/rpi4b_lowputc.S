@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm64/src/qemu/qemu_lowputc.S
+ * arch/arm64/src/rpi4b/rpi4b_lowputc.S
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -31,13 +31,13 @@
  * Public Symbols
  ****************************************************************************/
 
-    .file    "qemu_lowputc.S"
+    .file    "rpi4b_lowputc.S"
 
 /****************************************************************************
  * Assembly Macros
  ****************************************************************************/
 
- /* 32-bit register definition for qemu pl011 uart */
+ /* 32-bit register definition for rpi4b pl011 uart */
 
  #define UART1_BASE_ADDRESS 0x9000000
  #define EARLY_UART_PL011_BAUD_RATE  115200
@@ -55,8 +55,8 @@
 
 GTEXT(arm64_earlyprintinit)
 SECTION_FUNC(text, arm64_earlyprintinit)
-    /* it's seem we can do nothing at the qemu platform
-     * for qemu pl011, the QEMU has already initialized UART
+    /* it's seem we can do nothing at the rpi4b platform
+     * for rpi4b pl011, the RPI4B has already initialized UART
      */
     ret
 

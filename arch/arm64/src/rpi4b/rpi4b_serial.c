@@ -1,5 +1,5 @@
 /***************************************************************************
- * arch/arm64/src/qemu/qemu_serial.c
+ * arch/arm64/src/rpi4b/rpi4b_serial.c
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with

@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm64/src/qemu/chip.h
+ * arch/arm64/src/RPI4B/chip.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,8 +18,8 @@
  *
  ****************************************************************************/
 
-#ifndef __ARCH_ARM64_SRC_QEMU_CHIP_H
-#define __ARCH_ARM64_SRC_QEMU_CHIP_H
+#ifndef __ARCH_ARM64_SRC_RPI4B_CHIP_H
+#define __ARCH_ARM64_SRC_RPI4B_CHIP_H
 
 /****************************************************************************
  * Included Files
@@ -39,4 +39,4 @@
  * Macro Definitions
  ****************************************************************************/
 
-#endif /* __ARCH_ARM64_SRC_QEMU_CHIP_H */
+#endif /* __ARCH_ARM64_SRC_RPI4B_CHIP_H */

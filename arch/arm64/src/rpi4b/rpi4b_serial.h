@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm64/src/qemu/qemu_boot.h
+ * arch/arm64/src/rpi4b/rpi4b_serial.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,62 +18,41 @@
  *
  ****************************************************************************/
 
-#ifndef __ARCH_ARM64_SRC_QEMU_QEMU_BOOT_H
-#define __ARCH_ARM64_SRC_QEMU_QEMU_BOOT_H
+#ifndef __ARCH_ARM64_SRC_RPI4B_RPI4B_SERIAL_H
+#define __ARCH_ARM64_SRC_RPI4B_RPI4B_SERIAL_H
 
 /****************************************************************************
  * Included Files
  ****************************************************************************/
 
 #include <nuttx/config.h>
-#include <nuttx/compiler.h>
-#include <sys/types.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <arch/chip/chip.h>
 
 /****************************************************************************
  * Pre-processor Definitions
  ****************************************************************************/
 
 /****************************************************************************
- * Public Function Prototypes
+ * Public Types
+ ****************************************************************************/
+
+/****************************************************************************
+ * Inline Functions
  ****************************************************************************/
 
 #ifndef __ASSEMBLY__
 
-#undef EXTERN
-#if defined(__cplusplus)
-#define EXTERN extern "C"
-extern "C"
-{
-#else
-#define EXTERN extern
+/****************************************************************************
+ * Public Data
+ ****************************************************************************/
+
+#ifdef CONFIG_ARCH_CHIP_RPI4B
+#define CONFIG_RPI4B_UART_BASE      0x9000000
+#define CONFIG_RPI4B_UART_IRQ       (GIC_SPI_INT_BASE + 1)
 #endif
 
 /****************************************************************************
- * Name: qemu_board_initialize
- *
- * Description:
- *   All qemu architectures must provide the following entry point.  This
- *   entry point is called in the initialization phase -- after
- *   imx_memory_initialize and after all memory has been configured and
- *   mapped but before any devices have been initialized.
- *
- * Input Parameters:
- *   None
- *
- * Returned Value:
- *   None
- *
+ * Public Function Prototypes
  ****************************************************************************/
 
-void qemu_board_initialize(void);
-
-#undef EXTERN
-#if defined(__cplusplus)
-}
-#endif
-
 #endif /* __ASSEMBLY__ */
-#endif /* __ARCH_ARM64_SRC_QEMU_QEMU_BOOT_H */
+#endif /* __ARCH_ARM64_SRC_RPI4B_RPI4B_SERIAL_H */

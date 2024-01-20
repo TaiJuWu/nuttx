@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm64/include/qemu/irq.h
+ * arch/arm64/include/rpi4b/irq.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -22,8 +22,8 @@
  * only indirectly through nuttx/irq.h
  */
 
-#ifndef __ARCH_ARM64_INCLUDE_QEMU_IRQ_H
-#define __ARCH_ARM64_INCLUDE_QEMU_IRQ_H
+#ifndef __ARCH_ARM64_INCLUDE_RPI4B_IRQ_H
+#define __ARCH_ARM64_INCLUDE_RPI4B_IRQ_H
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -31,4 +31,4 @@
 
 #define NR_IRQS                 220  /* Total number of interrupts */
 
-#endif /* __ARCH_ARM64_INCLUDE_QEMU_IRQ_H */
+#endif /* __ARCH_ARM64_INCLUDE_RPI4B_IRQ_H */

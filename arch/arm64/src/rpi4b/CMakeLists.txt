@@ -1,5 +1,5 @@
 # ##############################################################################
-# arch/arm64/src/qemu/CMakeLists.txt
+# arch/arm64/src/rpi4b/CMakeLists.txt
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more contributor
 # license agreements.  See the NOTICE file distributed with this work for
@@ -17,12 +17,12 @@
 # the License.
 #
 # ##############################################################################
-set(SRCS qemu_boot.c qemu_serial.c)
+set(SRCS rpi4b_boot.c rpi4b_serial.c)
 
 if(CONFIG_ARCH_EARLY_PRINT)
-  list(APPEND SRCS qemu_lowputc.S)
+  list(APPEND SRCS rpi4b_lowputc.S)
 endif()
 if(CONFIG_ARCH_USE_TEXT_HEAP)
-  list(APPEND SRCS qemu_textheap.c)
+  list(APPEND SRCS rpi4b_textheap.c)
 endif()
 target_sources(arch PRIVATE ${SRCS})

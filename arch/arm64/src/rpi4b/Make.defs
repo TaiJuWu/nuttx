@@ -1,5 +1,5 @@
 ############################################################################
-# arch/arm64/src/qemu/Make.defs
+# arch/arm64/src/rpi4b/Make.defs
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -20,13 +20,13 @@
 
 include common/Make.defs
 
-# qemu-specific C source files
-CHIP_CSRCS  = qemu_boot.c qemu_serial.c
+# rpi4b-specific C source files
+CHIP_CSRCS  = rpi4b_boot.c rpi4b_serial.c
 
 ifeq ($(CONFIG_ARCH_EARLY_PRINT),y)
-CHIP_ASRCS  = qemu_lowputc.S
+CHIP_ASRCS  = rpi4b_lowputc.S
 endif
 
 ifeq ($(CONFIG_ARCH_USE_TEXT_HEAP),y)
-CHIP_CSRCS += qemu_textheap.c
+CHIP_CSRCS += rpi4b_textheap.c
 endif
