@@ -1845,6 +1845,12 @@ config ARCH_BOARD_RASPBERRYPI_PICO_W
 	---help---
 		This is a port to the Raspberry Pi Pico W board.
 
+config ARCH_BOARD_RPI4B
+	bool "Raspberry Pi 4 modelB"
+	depends on ARCH_CHIP_RPI4B
+	---help---
+		This is a port to the Raspberry Pi 4 modelB board.
+
 config ARCH_BOARD_PIMORONI_TINY2040
 	bool "Pimoroni Tiny2040 board"
 	depends on ARCH_CHIP_RP2040
@@ -3252,6 +3258,7 @@ config ARCH_BOARD
 	default "intel64-qemu"              if ARCH_BOARD_INTEL64_QEMU
 	default "raspberrypi-pico"          if ARCH_BOARD_RASPBERRYPI_PICO
 	default "raspberrypi-pico-w"        if ARCH_BOARD_RASPBERRYPI_PICO_W
+	default "rpi4b-armv8a"				if ARCH_BOARD_RPI4B
 	default "pimoroni-tiny2040"         if ARCH_BOARD_PIMORONI_TINY2040
 	default "adafruit-feather-rp2040"   if ARCH_BOARD_ADAFRUIT_FEATHER_RP2040
 	default "seeed-xiao-rp2040"         if ARCH_BOARD_SEEED_XIAO_RP2040
@@ -3658,6 +3665,9 @@ source "boards/arm/rp2040/raspberrypi-pico/Kconfig"
 endif
 if ARCH_BOARD_RASPBERRYPI_PICO_W
 source "boards/arm/rp2040/raspberrypi-pico-w/Kconfig"
+endif
+if ARCH_BOARD_RPI4B
+source "boards/arm64/rpi4b/rpi4b-armv8a/Kconfig"
 endif
 if ARCH_BOARD_PIMORONI_TINY2040
 source "boards/arm/rp2040/pimoroni-tiny2040/Kconfig"
