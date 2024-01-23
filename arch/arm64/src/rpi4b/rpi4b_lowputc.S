@@ -26,21 +26,40 @@
 #include <nuttx/config.h>
 
 #include "arm64_macro.inc"
-
+#include "chip.h"
 /****************************************************************************
  * Public Symbols
  ****************************************************************************/
 
     .file    "rpi4b_lowputc.S"
+    .extern   uart_init
 
 /****************************************************************************
  * Assembly Macros
  ****************************************************************************/
 
  /* 32-bit register definition for rpi4b pl011 uart */
+#define GPIO_BASE_ADDRESS 0xFE000000
 
- #define UART1_BASE_ADDRESS 0x9000000
- #define EARLY_UART_PL011_BAUD_RATE  115200
+#define UART1_BASE_ADDRESS (GPIO_BASE_ADDRESS + 0x00201000)
+#define EARLY_UART_PL011_BAUD_RATE  115200
+
+#define GPFSEL1         (PBASE+0x00200004)
+#define GPSET0          (PBASE+0x0020001C)
+#define GPCLR0          (PBASE+0x00200028)
+#define GPPUD           (PBASE+0x00200094)
+#define GPPUDCLK0       (PBASE+0x00200098)
+#define GPIO_PUP_PDN_CNTRL_REG0 (PBASE+0x002000E4)
+
+#define U_BASE       (PBASE+0x00201000)
+
+#define U_DATA_REG   (U_BASE)
+#define U_FR_REG     (U_BASE+0x18)
+#define U_IBRD_REG   (U_BASE+0x24)
+#define U_FBRD_REG   (U_BASE+0x28)
+#define U_LCRH_REG   (U_BASE+0x2C)
+#define U_CR_REG     (U_BASE+0x30)
+#define U_IMSC_REG   (U_BASE+0x38)
 
 /****************************************************************************
  * Private Functions
@@ -58,6 +77,7 @@ SECTION_FUNC(text, arm64_earlyprintinit)
     /* it's seem we can do nothing at the rpi4b platform
      * for rpi4b pl011, the RPI4B has already initialized UART
      */
+    # ldr x15,=uart_init
     ret
 
 /* PL011 UART wait UART to be ready to transmit
