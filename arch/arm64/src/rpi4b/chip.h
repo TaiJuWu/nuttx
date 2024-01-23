@@ -34,28 +34,28 @@
 /****************************************************************************
  * Pre-processor Definitions
  ****************************************************************************/
+// // already define common/arm64
+// #define KB(x)           ((x) << 10)
+// #define MB(x)           (KB(x) << 10)
+// #define GB(x)           (MB(UINT64_C(x)) << 10)
 
-#define KB(x)           ((x) << 10)
-#define MB(x)           (KB(x) << 10)
-#define GB(x)           (MB(UINT64_C(x)) << 10)
+// /* Raspberry 4B Generic Interrupt Controller v2: Distributor and Redist */
+// /* reference: https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf */
 
-/* Raspberry 4B Generic Interrupt Controller v2: Distributor and Redist */
-/* reference: https://datasheets.raspberrypi.com/bcm2711/bcm2711-peripherals.pdf */
+// #define CONFIG_GICD_BASE          0x4c0040000 /* P92 */
+// #define CONFIG_GICR_BASE          0x4c0000000 /* P92 */
 
-#define CONFIG_GICD_BASE          0x4c0040000 /* P92 */
-#define CONFIG_GICR_BASE          0x4c0000000 /* P92 */
+// /* Raspberry 4B Memory Map: RAM and Device I/O */
 
-/* Raspberry 4B Memory Map: RAM and Device I/O */
+// #define CONFIG_RAMBANK1_ADDR      0x00000000 /* P5 */
+// #define CONFIG_RAMBANK1_SIZE      MB(32)
 
-#define CONFIG_RAMBANK1_ADDR      0x00000000 /* P5 */
-#define CONFIG_RAMBANK1_SIZE      MB(32)
+// #define CONFIG_DEVICEIO_BASEADDR  0xFE000000 /* Legacy mode */
+// #define CONFIG_DEVICEIO_SIZE      GB(32)
 
-#define CONFIG_DEVICEIO_BASEADDR  0x00000000 /* Unknown */
-#define CONFIG_DEVICEIO_SIZE      GB(32)
+// /* U-Boot loads NuttX at this address (kernel_addr_r) */
 
-/* U-Boot loads NuttX at this address (kernel_addr_r) */
-
-#define CONFIG_LOAD_BASE          0x40080000 /* Unknown */
+// #define CONFIG_LOAD_BASE          0x40080000 /* Unknown */
 
 /****************************************************************************
  * Macro Definitions
