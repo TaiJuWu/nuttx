@@ -73,13 +73,30 @@ bool nxsched_add_prioritized(FAR struct tcb_s *tcb, DSEG dq_queue_t *list)
 
   DEBUGASSERT(sched_priority >= SCHED_PRIORITY_MIN);
 
+  /* Deadline scheduler check the priority is minial */
+#ifdef CONFIG_SCHED_DEADLINE
+  if ((tcb->flags & TCB_FLAG_POLICY_MASK) == TCB_FLAG_SCHED_DEADLINE)
+  {
+    DEBUGASSERT(tcb->sched_priority == SCHED_PRIORITY_MIN);
+  }
+#endif
+
   /* Search the list to find the location to insert the new Tcb.
    * Each is list is maintained in descending sched_priority order.
    */
 
   for (next = (FAR struct tcb_s *)list->head;
        (next && sched_priority <= next->sched_priority);
-       next = next->flink);
+       next = next->flink)
+       {
+#ifdef CONFIG_SCHED_DEADLINE
+      if((tcb->flags & TCB_FLAG_SCHED_DEADLINE) == TCB_FLAG_SCHED_DEADLINE
+        && tcb->deadline < next->deadline)
+        {
+          break;
+        }
+#endif
+       };
 
   /* Add the tcb to the spot found in the list.  Check if the tcb
    * goes at the end of the list. NOTE:  This could only happen if list

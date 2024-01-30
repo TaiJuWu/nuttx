@@ -625,6 +625,12 @@ config SCHED_SPORADIC
 		Build in additional logic to support sporadic scheduling
 		(SCHED_SPORADIC).
 
+config SCHED_DEADLINE
+	bool "Support deadline first algorithm"
+	default y
+	---help---
+		Support deadline first algorithm
+
 if SCHED_SPORADIC
 
 config SCHED_SPORADIC_MAXREPL

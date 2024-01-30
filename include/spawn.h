@@ -97,6 +97,10 @@ struct posix_spawnattr_s
   struct timespec repl_period;   /* Replenishment period */
   struct timespec budget;        /* Initial budget */
 #endif
+
+#ifdef CONFIG_SCHED_DEADLINE
+  int32_t deadline;
+#endif
 };
 
 typedef struct posix_spawnattr_s posix_spawnattr_t;

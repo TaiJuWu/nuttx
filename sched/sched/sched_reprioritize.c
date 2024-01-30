@@ -70,6 +70,8 @@ int nxsched_reprioritize(FAR struct tcb_s *tcb, int sched_priority)
    * is done only on explicit, user-initiated reprioritization.
    */
 
+  DEBUGASSERT(tcb->flag && TCB_FLAG_POLICY_MASK != TCB_FLAG_SCHED_DEADLINE);
+
   int ret = nxsched_set_priority(tcb, sched_priority);
   if (ret == 0)
     {

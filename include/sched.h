@@ -46,6 +46,7 @@
 #define SCHED_FIFO                1  /* FIFO priority scheduling policy */
 #define SCHED_RR                  2  /* Round robin scheduling policy */
 #define SCHED_SPORADIC            3  /* Sporadic scheduling policy */
+#define SCHED_DEADLINE            4  /* Deadline first policy */
 
 /* Maximum number of SCHED_SPORADIC replenishments */
 
@@ -196,6 +197,10 @@ struct sched_param
   struct timespec sched_ss_init_budget; /* Initial budget for sporadic server */
   int sched_ss_max_repl;                /* Maximum pending replenishments for
                                          * sporadic server. */
+#endif
+
+#ifdef CONFIG_SCHED_DEADLINE
+  int32_t deadline;
 #endif
 };
 

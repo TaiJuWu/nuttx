@@ -186,6 +186,7 @@ bool nxsched_add_readytorun(FAR struct tcb_s *btcb)
    * required.
    */
 
+// Q: need to add Deadline first algo.
   if (rtcb->sched_priority < btcb->sched_priority)
     {
       task_state = TSTATE_TASK_RUNNING;

@@ -114,6 +114,12 @@ int nxsched_set_param(pid_t pid, FAR const struct sched_param *param)
           goto errout_with_lock;
         }
     }
+#ifdef CONFIG_SCHED_DEADLINE
+  if ((rtcb->flags & TCB_FLAG_POLICY_MASK) == TCB_FLAG_SCHED_DEADLINE)
+    {
+      rtcb->deadline = param->deadline;
+    }
+#endif
 
 #ifdef CONFIG_SCHED_SPORADIC
   /* Update parameters associated with SCHED_SPORADIC */

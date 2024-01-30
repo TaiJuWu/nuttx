@@ -109,6 +109,10 @@ int nxsched_get_param(pid_t pid, FAR struct sched_param *param)
 
           param->sched_priority = (int)tcb->sched_priority;
 
+#ifdef CONFIG_SCHED_DEADLINE
+          param->deadline = tcb->deadline;
+#endif
+
 #ifdef CONFIG_SCHED_SPORADIC
           if ((tcb->flags & TCB_FLAG_POLICY_MASK) == TCB_FLAG_SCHED_SPORADIC)
             {

@@ -405,6 +405,9 @@ static int nxthread_setup_scheduler(FAR struct tcb_s *tcb, int priority,
 #if CONFIG_RR_INTERVAL > 0
       tcb->flags         |= TCB_FLAG_SCHED_RR;
       tcb->timeslice      = MSEC2TICK(CONFIG_RR_INTERVAL);
+#if CONFIG_SCHED_DEADLINE
+      tcb->deadline      = 0; // Q: how to get deadline?
+#endif
 #else
       tcb->flags         |= TCB_FLAG_SCHED_FIFO;
 #endif

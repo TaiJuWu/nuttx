@@ -88,6 +88,17 @@ static inline void nxsched_cpu_scheduler(int cpu)
       nxsched_process_sporadic(rtcb, 1, false);
     }
 #endif
+
+#ifdef CONFIG_SCHED_DEADLINE
+/* Check if the currently executing task uses deadline first scheduling. */
+
+  if ((rtcb->flags & TCB_FLAG_POLICY_MASK) == TCB_FLAG_SCHED_DEADLINE)
+    {
+      nxsched_process_deadline(rtcb, 1, false);
+    }
+
+#endif
+
 }
 #endif
 

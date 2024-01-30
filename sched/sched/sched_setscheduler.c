@@ -92,6 +92,9 @@ int nxsched_set_scheduler(pid_t pid, int policy,
 #ifdef CONFIG_SCHED_SPORADIC
       && policy != SCHED_SPORADIC
 #endif
+#ifdef CONFIG_SCHED_DEADLINE
+      && policy != SCHED_DEADLINE
+#endif
      )
     {
       return -EINVAL;
@@ -134,6 +137,7 @@ int nxsched_set_scheduler(pid_t pid, int policy,
     {
       default:
       case SCHED_FIFO:
+      case SCHED_DEADLINE:
         {
 #ifdef CONFIG_SCHED_SPORADIC
           /* Cancel any on-going sporadic scheduling */
@@ -149,6 +153,11 @@ int nxsched_set_scheduler(pid_t pid, int policy,
           tcb->flags     |= TCB_FLAG_SCHED_FIFO;
 #if CONFIG_RR_INTERVAL > 0 || defined(CONFIG_SCHED_SPORADIC)
           tcb->timeslice  = 0;
+#endif
+
+#ifdef CONFIG_SCHED_DEADLINE
+        tcb->flags     |= TCB_FLAG_SCHED_DEADLINE;
+        tcb->deadline = param->deadline;
 #endif
         }
         break;

@@ -103,7 +103,7 @@ bool nxsched_merge_pending(void)
            * new ptcb. Each is list is maintained in ascending sched_priority
            * order.
            */
-
+          // Q:
           for (;
                (rtcb && ptcb->sched_priority <= rtcb->sched_priority);
                rtcb = rtcb->flink)

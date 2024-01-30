@@ -382,6 +382,13 @@ int nx_pthread_create(pthread_trampoline_t trampoline, FAR pthread_t *thread,
     }
 #endif
 
+#ifdef CONFIG_DEADLINE_FIRST
+  // Q: set deadline?
+  // param.sched_priority = SCHED_PRIORITY_MIN;
+  // param.deadline = attr
+  if()
+#endif
+
   /* Initialize the task control block */
 
   ret = pthread_setup_scheduler(ptcb, param.sched_priority, pthread_start,
@@ -444,6 +451,12 @@ int nx_pthread_create(pthread_trampoline_t trampoline, FAR pthread_t *thread,
 #ifdef CONFIG_SCHED_SPORADIC
       case SCHED_SPORADIC:
         ptcb->cmn.flags    |= TCB_FLAG_SCHED_SPORADIC;
+        break;
+#endif
+
+#ifdef CONFIG_SCHED_DEADLINE
+      case SCHED_DEADLINE:
+        ptcb->cmn.flags    |= TCB_FLAG_SCHED_DEADLINE;
         break;
 #endif
     }

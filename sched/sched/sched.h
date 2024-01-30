@@ -376,6 +376,12 @@ uint32_t nxsched_process_sporadic(FAR struct tcb_s *tcb, uint32_t ticks,
 void nxsched_sporadic_lowpriority(FAR struct tcb_s *tcb);
 #endif
 
+#ifdef CONFIG_SCHED_DEADLINE
+uint32_t nxsched_process_deadline(FAR struct tcb_s *tcb, uint32_t ticks,
+                                    bool noswitches);
+
+#endif
+
 #ifdef CONFIG_SIG_SIGSTOP_ACTION
 void nxsched_suspend(FAR struct tcb_s *tcb);
 #endif

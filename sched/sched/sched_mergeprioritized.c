@@ -131,7 +131,7 @@ void nxsched_merge_prioritized(FAR dq_queue_t *list1, FAR dq_queue_t *list2,
         }
 
       /* Which TCB has higher priority? */
-
+      // Q:
       else if (tcb1->sched_priority > tcb2->sched_priority)
         {
           /* The TCB from list1 has higher priority than the TCB from list2.
